@@ -1,0 +1,25 @@
+@startuml
+title Padrão Iterator - Playlist de músicas
+skinparam classAttributeIconSize 0
+interface "Iterable<Musica>" as Iterable {
+  +iterator(): Iterator<Musica>
+}
+class Playlist {
+  -musicas: List<Musica>
+  +Playlist(musicas: Musica...)
+  +iterator(): Iterator<Musica>
+}
+class Musica {
+  -titulo: String
+  -duracaoSegundos: int
+  -favorita: boolean
+}
+class Estatistica {
+  +{static} contarFavoritas(p: Playlist): Integer
+  +{static} contarTotalMusicas(p: Playlist): Integer
+  +{static} calcularDuracaoTotal(p: Playlist): Integer
+}
+Iterable <|.. Playlist
+Playlist o--> "*" Musica
+Estatistica ..> Playlist : percorre
+@enduml
